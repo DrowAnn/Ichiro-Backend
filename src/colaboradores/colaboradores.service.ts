@@ -7,25 +7,42 @@ export class ColaboradoresService {
   constructor(private prismaService: PrismaService) {}
 
   async crearColaborador(data: Colaboradores): Promise<Colaboradores> {
-    return 'This action adds a new colaboradore';
+    return await this.prismaService.colaboradores.create({
+      data,
+    });
   }
 
-  async buscarColaboradores() {
-    return `This action returns all colaboradores`;
+  async buscarColaboradores(): Promise<Colaboradores[]> {
+    return await this.prismaService.colaboradores.findMany();
   }
 
-  async buscarColaborador(id: number) {
-    return `This action returns a #${id} colaboradore`;
+  async buscarColaborador(
+    numeroIdentificacion: number,
+  ): Promise<Colaboradores> {
+    return await this.prismaService.colaboradores.findUnique({
+      where: {
+        numeroIdentificacion,
+      },
+    });
   }
 
   async actualizarColaborador(
-    id: number,
-    updateColaboradoreDto: UpdateColaboradoreDto,
-  ) {
-    return `This action updates a #${id} colaboradore`;
+    numeroIdentificacion: number,
+    data: Colaboradores,
+  ): Promise<Colaboradores> {
+    return await this.prismaService.colaboradores.update({
+      where: {
+        numeroIdentificacion,
+      },
+      data,
+    });
   }
 
-  async borrarColaborador(id: number) {
-    return `This action removes a #${id} colaboradore`;
+  async borrarColaborador(numeroIdentificacion: number) {
+    return await this.prismaService.colaboradores.delete({
+      where: {
+        numeroIdentificacion,
+      },
+    });
   }
 }
