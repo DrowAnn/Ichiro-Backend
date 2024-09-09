@@ -1,34 +1,51 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ColaboradoresService } from './colaboradores.service';
-import { CreateColaboradoreDto } from './dto/create-colaboradore.dto';
-import { UpdateColaboradoreDto } from './dto/update-colaboradore.dto';
+import { Colaboradores } from '@prisma/client';
 
 @Controller('colaboradores')
 export class ColaboradoresController {
   constructor(private readonly colaboradoresService: ColaboradoresService) {}
 
   @Post()
-  create(@Body() createColaboradoreDto: CreateColaboradoreDto) {
-    return this.colaboradoresService.create(createColaboradoreDto);
+  crearUno(@Body() data: Colaboradores) {
+    return this.colaboradoresService.crearColaborador(data);
   }
 
   @Get()
-  findAll() {
-    return this.colaboradoresService.findAll();
+  buscarTodos() {
+    return this.colaboradoresService.buscarColaboradores();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.colaboradoresService.findOne(+id);
+  @Get(':numeroIdentificacion')
+  buscarUno(@Param('numeroIdentificacion') numeroIdentificacion: string) {
+    return this.colaboradoresService.buscarColaborador(
+      Number(numeroIdentificacion),
+    );
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateColaboradoreDto: UpdateColaboradoreDto) {
-    return this.colaboradoresService.update(+id, updateColaboradoreDto);
+  @Patch(':numeroIdentificacion')
+  actualizacionParcial(
+    @Param('numeroIdentificacion') numeroIdentificacion: string,
+    @Body() data: Colaboradores,
+  ) {
+    return this.colaboradoresService.actualizarColaborador(
+      Number(numeroIdentificacion),
+      data,
+    );
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.colaboradoresService.remove(+id);
+  @Delete(':numeroIdentificacion')
+  borrarUno(@Param('numeroIdentificacion') numeroIdentificacion: string) {
+    return this.colaboradoresService.borrarColaborador(
+      Number(numeroIdentificacion),
+    );
   }
 }
