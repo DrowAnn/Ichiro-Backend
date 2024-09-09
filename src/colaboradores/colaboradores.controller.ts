@@ -6,20 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ColaboradoresService } from './colaboradores.service';
 import { Colaboradores } from '@prisma/client';
+import { AuthGuard } from 'src/auth/guards/auth/auth.guard';
 
 @Controller('colaboradores')
+@UseGuards(AuthGuard)
 export class ColaboradoresController {
   constructor(private readonly colaboradoresService: ColaboradoresService) {}
 
   @Post()
+  // @UseGuards(AuthGuard)
   crearUno(@Body() data: Colaboradores) {
     return this.colaboradoresService.crearColaborador(data);
   }
 
   @Get()
+  // @UseGuards(kAuthGuard)
   buscarTodos() {
     return this.colaboradoresService.buscarColaboradores();
   }
@@ -32,6 +37,7 @@ export class ColaboradoresController {
   }
 
   @Patch(':numeroIdentificacion')
+  // @UseGuards(AuthGuard)
   actualizacionParcial(
     @Param('numeroIdentificacion') numeroIdentificacion: string,
     @Body() data: Colaboradores,
@@ -43,6 +49,7 @@ export class ColaboradoresController {
   }
 
   @Delete(':numeroIdentificacion')
+  // @UseGuards(AuthGuard)
   borrarUno(@Param('numeroIdentificacion') numeroIdentificacion: string) {
     return this.colaboradoresService.borrarColaborador(
       Number(numeroIdentificacion),
