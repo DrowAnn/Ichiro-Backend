@@ -27,4 +27,136 @@ model Colaboradores {
   segundoNombre String?
   primerApellido String
   segundoApellido String?
+  celular Int
+  correo String
+  direccion String
+  telefonoFijo Int
+  fechaNacimiento DateTime @db.Date
+  fechaIngreso DateTime @db.Date
+  genero String
+  cargo String
+  area String
+  riesgoARL Int
+  tipoContrato String
+  profesion String
+  escolaridad String
+  experienciaAnos Int
+  salarioBase Decimal @db.Money
+  horasMensualesContratadas Int
+  formaPago String
+  activo Boolean @default(true)
+  datosSociodemograficos DatosSociodemograficos[]
+  jornadasLaborales JornadasLaborales[]
+  liquidacionesNomina LiquidacionesNomina[]
+}
+
+model DatosSociodemograficos {
+  numeroIdentificacion Int @id
+  colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
+  estadoCivil String
+  promedioIngresosMensuales String
+  estratoSocioeconomico Int
+  tipoVivienda String
+  grupoSanguineo String
+  enfermedadesDiagnosticadasPermanentes Boolean
+  tiposEnfermedadesPermanentes Json?
+  medicamentoRecetadoPermanente Boolean
+  tiposMedicamentosPermanentes Json?
+  fuma Boolean
+  consumeBebidasAlcoholicas Boolean
+  consumeBebidasEnergeticasConstantemente Boolean
+  practicaDeportivaRegular Boolean
+  otroTrabajo Boolean
+  laboresDomesticas Boolean
+  recreacionDeporte Boolean
+  estudio Boolean
+  otraActividad Boolean
+  vacunacion Boolean
+  saludOral Boolean
+  valoracionMedicoOcupacional Boolean
+  examenesLaboratorio Boolean
+  spaRelajacionSimilar Boolean
+  actividadesSST Boolean
+  ninguna Boolean
+  cantidadDosisCovid19 Int
+  ultimaAplicacion DateTime? @db.Date
+  nombreConyuge String?
+  edadConyuge Int?
+  telefonoConyuge Int?
+  tieneHijos Boolean
+  cuantosHijosTiene Int? @default(0)
+  datosHijos Json?
+  personasNucleoFamiliar Int
+  personasDependientesEconomicamente Int
+  parentescos String?
+  eps String
+  fondoPension String
+  arl String
+  nombreContactoEmergencia String
+  telefonoContactoEmergencia String
+  parentescoContactoEmergencia String
+}
+
+model JornadasLaborales {
+  idJornada Int @id @default(autoincrement())
+  numeroIdentificacion Int
+  colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
+  diaJornada DateTime @db.Date
+  festivo Boolean
+  horaProgramadaEntrada DateTime @db.Time()
+  horaProgramadaSalida DateTime @db.Time()
+  horaEntrada DateTime @db.Time()
+  horaSalida DateTime @db.Time()
+  llegadaTarde Boolean
+  cantidadHorasExtrasDiurnas Float
+  cantidadHorasExtrasNocturnas Float
+  cantidadHorasExtrasDiurnasDominicalFestiva Float
+  cantidadHorasExtrasNocturnasDominicalFestiva Float
+  cantidadHorasRecargoNocturno Float
+  cantidadHorasRecargoDiurnoDominicalFestivo Float
+  cantidadHorasRecargoNocturnoDominicalFestivo Float
+}
+
+model LiquidacionesNomina {
+  idLiquidacion Int @id @default(autoincrement())
+  numeroIdentificacion Int
+  colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
+  mes Int
+  quincena Int
+  salarioBase Int
+  valorHora Float
+  horasLaboradas Float
+  baseLiquidacion Float
+  auxilioTransporte Float
+  horasIncapacidad Float
+  pagoIncapacidad Decimal @db.Money
+  cantidadHorasExtrasDiurnas Float
+  valorHorasExtrasDiurnas Decimal @db.Money
+  cantidadHorasExtrasNocturnas Float
+  valorHorasExtrasNocturnas Decimal @db.Money
+  cantidadHorasExtrasDiurnasDominicalFestiva Float
+  valorHorasExtrasDiurnasDominicalFestiva Decimal @db.Money
+  cantidadHorasExtrasNocturnasDominicalFestiva Float
+  valorHorasExtrasNocturnasDominicalFestiva Decimal @db.Money
+  cantidadHorasRecargoNocturno Float
+  valorHorasRecargoNocturno Decimal @db.Money
+  cantidadHorasRecargoDiurnoDominicalFestivo Float
+  valorHorasRecargoDiurnoDominicalFestivo Decimal @db.Money
+  cantidadHorasRecargoNocturnoDominicalFestivo Float
+  valorHorasRecargoNocturnoDominicalFestivo Decimal @db.Money
+  productividad Decimal @db.Money
+  bonificaciones Decimal @db.Money
+  asistenciaTecnica Decimal @db.Money
+  totalDevengado Decimal @db.Money
+  salud Decimal @db.Money
+  pension Decimal @db.Money
+  deducciones Json
+  netoPagado Decimal @db.Money
+  aportesAlColaborador Json
+  seguroVida Decimal @db.Money
+  retenciones Decimal @db.Money
+  vacaciones Decimal @db.Money
+  cesantias Decimal @db.Money
+  prima Decimal @db.Money
+  totalPagar Decimal @db.Money
 }
