@@ -1,15 +1,17 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Usuarios } from '@prisma/client';
 import { LogInAuthDto } from './dto/auth-data.dto';
+import { CrearUsuarioDto } from 'src/usuarios/dto/crear-usuario.dto';
+import { ActualizarUsuarioDto } from 'src/usuarios/dto/actualizar-usuario.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('registrar')
-  async crearUno(@Body() data: Usuarios): Promise<Usuarios> {
-    return await this.authService.registrar(data);
+  async registrarUsuario(@Body() data: CrearUsuarioDto): Promise<Usuarios> {
+    return await this.authService.registrarUsuario(data);
   }
 
   @Post('login')
@@ -17,5 +19,13 @@ export class AuthController {
     @Body() authData: LogInAuthDto,
   ): Promise<{ accessToken: string }> {
     return await this.authService.login(authData);
+  }
+
+  @Patch('actualizar/:nombreUsuario')
+  async actualizarUsuario(
+    @Param('nombreUsuario') nombreUsuario: string,
+    @Body() data: ActualizarUsuarioDto,
+  ) {
+    return await this.authService.actualizarUsuario(nombreUsuario, data);
   }
 }

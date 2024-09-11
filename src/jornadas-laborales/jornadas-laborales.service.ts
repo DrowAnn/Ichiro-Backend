@@ -20,6 +20,16 @@ export class JornadasLaboralesService {
     return await this.prismaService.jornadasLaborales.findMany();
   }
 
+  async buscarJornadasLaboralesColaborador(
+    numeroIdentificacion: string,
+  ): Promise<JornadasLaborales[]> {
+    return await this.prismaService.jornadasLaborales.findMany({
+      where: {
+        numeroIdentificacion,
+      },
+    });
+  }
+
   async buscarJornadaLaboral(
     numeroIdentificacion: string,
     diaJornada: Date,

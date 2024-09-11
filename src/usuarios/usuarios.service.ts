@@ -1,12 +1,14 @@
 import { Usuarios } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CrearUsuarioDto } from './dto/crear-usuario.dto';
+import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
 
 @Injectable()
 export class UsuariosService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async crearUsuario(data: Usuarios): Promise<Usuarios> {
+  async crearUsuario(data: CrearUsuarioDto): Promise<Usuarios> {
     return await this.prismaService.usuarios.create({
       data,
     });
@@ -16,27 +18,30 @@ export class UsuariosService {
     return await this.prismaService.usuarios.findMany();
   }
 
-  async buscarUsuario(correo: string): Promise<Usuarios> {
+  async buscarUsuario(nombreUsuario: string): Promise<Usuarios> {
     return await this.prismaService.usuarios.findUnique({
       where: {
-        correo,
+        nombreUsuario,
       },
     });
   }
 
-  async actualizarUsuario(correo: string, data: Usuarios): Promise<Usuarios> {
+  async actualizarUsuario(
+    nombreUsuario: string,
+    data: ActualizarUsuarioDto,
+  ): Promise<Usuarios> {
     return await this.prismaService.usuarios.update({
       where: {
-        correo,
+        nombreUsuario,
       },
       data,
     });
   }
 
-  async borrarUsuario(correo: string) {
+  async borrarUsuario(nombreUsuario: string) {
     return await this.prismaService.usuarios.delete({
       where: {
-        correo,
+        nombreUsuario,
       },
     });
   }

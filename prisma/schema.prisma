@@ -14,15 +14,17 @@ datasource db {
 }
 
 model Usuarios {
-  id Int @id @default(autoincrement())
-  correo String @unique
-  nombre String
+  nombreUsuario String @id
+  correo String? @unique
+  numeroIdentificacion String? @unique
+  colaborador Colaboradores? @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
   contrasena String
   rol String? @default("user")
 }
 
 model Colaboradores {
   numeroIdentificacion String @id
+  usuario Usuarios? @relation
   primerNombre String
   segundoNombre String?
   primerApellido String
@@ -102,10 +104,10 @@ model JornadasLaborales {
   colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
   diaJornada DateTime @db.Date
   festivo Boolean?
-  horaProgramadaEntrada DateTime? @db.Time()
-  horaProgramadaSalida DateTime? @db.Time()
-  horaEntrada DateTime? @db.Time()
-  horaSalida DateTime? @db.Time()
+  horaProgramadaEntrada DateTime?
+  horaProgramadaSalida DateTime?
+  horaEntrada DateTime?
+  horaSalida DateTime?
   llegadaTarde Boolean?
   cantidadHorasExtrasDiurnas Float?
   cantidadHorasExtrasNocturnas Float?
@@ -123,6 +125,7 @@ model LiquidacionesNomina {
   numeroIdentificacion String
   colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
   mes Int @db.SmallInt
+  ano Int @db.SmallInt
   quincena Int @db.SmallInt
   salarioBase Decimal? @db.Money
   valorHora Decimal? @db.Money
@@ -161,5 +164,5 @@ model LiquidacionesNomina {
   prima Decimal? @db.Money
   totalPagar Decimal? @db.Money
 
-  @@id([numeroIdentificacion, mes, quincena])
+  @@id([numeroIdentificacion, mes, ano, quincena])
 }
