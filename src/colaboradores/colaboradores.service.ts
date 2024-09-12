@@ -15,9 +15,7 @@ export class ColaboradoresService {
   }
 
   async buscarColaboradores(): Promise<Colaboradores[]> {
-    const colaborador = await this.prismaService.colaboradores.findMany();
-    console.log(colaborador);
-    return colaborador;
+    return await this.prismaService.colaboradores.findMany();
   }
 
   async buscarColaborador(

@@ -1,0 +1,47 @@
+import { DatosSociodemograficos } from '@prisma/client';
+import { JsonValue } from '@prisma/client/runtime/library';
+
+export class CrearDatosSociodemograficosDto implements DatosSociodemograficos {
+  numeroIdentificacion: string;
+  estadoCivil: string;
+  estratoSocioeconomico: number;
+  tipoVivienda: string;
+  grupoSanguineo: string;
+  enfermedadesDiagnosticadasPermanentes: boolean;
+  tiposEnfermedadesPermanentes: JsonValue;
+  medicamentoRecetadoPermanente: boolean;
+  tiposMedicamentosPermanentes: JsonValue;
+  fuma: boolean;
+  consumeBebidasAlcoholicas: boolean;
+  consumeBebidasEnergeticasConstantemente: boolean;
+  practicaDeportivaRegular: boolean;
+  otroTrabajo: boolean;
+  laboresDomesticas: boolean;
+  recreacionDeporte: boolean;
+  estudio: boolean;
+  otraActividad: boolean;
+  vacunacion: boolean;
+  saludOral: boolean;
+  valoracionMedicoOcupacional: boolean;
+  examenesLaboratorio: boolean;
+  spaRelajacionSimilar: boolean;
+  actividadesSST: boolean;
+  ninguna: boolean;
+  cantidadDosisCovid19: number;
+  ultimaAplicacion: Date;
+  nombreConyuge: string;
+  edadConyuge: number;
+  telefonoConyuge: string;
+  tieneHijos: boolean;
+  cuantosHijosTiene: number;
+  datosHijos: JsonValue;
+  personasNucleoFamiliar: number;
+  personasDependientesEconomicamente: number;
+  parentescos: string;
+  eps: string;
+  fondoPension: string;
+  arl: string;
+  nombreContactoEmergencia: string;
+  telefonoContactoEmergencia: string;
+  parentescoContactoEmergencia: string;
+}

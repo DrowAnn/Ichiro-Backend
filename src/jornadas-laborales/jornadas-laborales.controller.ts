@@ -18,6 +18,7 @@ export class JornadasLaboralesController {
   constructor(
     private readonly jornadasLaboralesService: JornadasLaboralesService,
   ) {}
+
   @Post()
   crearUna(@Body() data: CrearJornadaLaboralDto) {
     return this.jornadasLaboralesService.crearJornadaLaboral(data);
@@ -47,7 +48,7 @@ export class JornadasLaboralesController {
     );
   }
 
-  @Patch(':numeroIdentificacion')
+  @Patch(':numeroIdentificacion/:diaJornada')
   actualizacionParcial(
     @Param() params: PrimaryKeyJornadaLaboralDto,
     @Body() data: ActualizarJornadaLaboralDto,
