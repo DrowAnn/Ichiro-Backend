@@ -13,13 +13,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Roles {
+  Super_Usuario
+  Administrador
+  Lider_De_Area
+  Colaborador
+}
+
+enum Area {
+  Asistencial
+  Administrativo
+  Financiero
+  Estetica
+  Comercial
+  Recepcion
+  Programacion
+  Instrumental_Y_Central_De_Lavado
+  Farmacia
+  Hospitalizacion
+  Servicios_Generales
+  Mantenimiento
+  Medicina_General
+  Rayos_X
+}
+
 model Usuarios {
   nombreUsuario String @id
   correo String? @unique
   numeroIdentificacion String? @unique
   colaborador Colaboradores? @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
   contrasena String
-  rol String? @default("user")
+  rol Roles @default(Colaborador)
 }
 
 model Colaboradores {
@@ -37,7 +61,7 @@ model Colaboradores {
   fechaIngreso DateTime? @db.Date
   genero String?
   cargo String?
-  area String?
+  area Area?
   riesgoARL Int? @db.SmallInt
   tipoContrato String?
   profesion String?

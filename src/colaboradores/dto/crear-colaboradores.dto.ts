@@ -1,4 +1,4 @@
-import { Colaboradores } from '@prisma/client';
+import { $Enums, Colaboradores } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
 
 export class CrearColaboradoresDto implements Colaboradores {
@@ -15,7 +15,7 @@ export class CrearColaboradoresDto implements Colaboradores {
   fechaIngreso: Date;
   genero: string;
   cargo: string;
-  area: string;
+  area: $Enums.Area;
   riesgoARL: number;
   tipoContrato: string;
   profesion: string;
