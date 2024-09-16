@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { DatosSociodemograficosService } from './datos-sociodemograficos.service';
-import { AuthGuard } from 'src/auth/guards/auth/auth.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { CrearDatosSociodemograficosDto } from './dto/crear-datos-sociodemograficos.dto';
 import { ActualizarDatosSociodemograficosDto } from './dto/actualizar-datos-sociodemograficos.dto';
 

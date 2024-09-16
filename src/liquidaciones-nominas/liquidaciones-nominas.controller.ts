@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { LiquidacionesNominasService } from './liquidaciones-nominas.service';
-import { AuthGuard } from 'src/auth/guards/auth/auth.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { CrearLiquidacionNominaDto } from './dto/crear-liquidacion-nomina.dto';
 import { PrimaryKeyLiquidacionNominaDto } from './dto/primarykey-liquidacion-nomina.dto';
 import { ActualizarLiquidacionNominaDto } from './dto/actualizar-liquidacion-nomina.dto';

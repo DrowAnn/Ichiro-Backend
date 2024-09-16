@@ -7,13 +7,16 @@ import {
   Delete,
   Param,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { JornadasLaboralesService } from './jornadas-laborales.service';
 import { CrearJornadaLaboralDto } from './dto/crear-jornada-laboral.dto';
 import { ActualizarJornadaLaboralDto } from './dto/actualizar-jornada-laboral.dto';
 import { PrimaryKeyJornadaLaboralDto } from './dto/primarykey-jornada-laboral.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('jornadas-laborales')
+@UseGuards(AuthGuard)
 export class JornadasLaboralesController {
   constructor(
     private readonly jornadasLaboralesService: JornadasLaboralesService,

@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ColaboradoresService } from './colaboradores.service';
-import { AuthGuard } from 'src/auth/guards/auth/auth.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { CrearColaboradoresDto } from './dto/crear-colaboradores.dto';
 import { ActualizarColaboradoresDto } from './dto/actualizar-colaboradores.dto';
 
