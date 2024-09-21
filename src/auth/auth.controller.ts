@@ -20,12 +20,4 @@ export class AuthController {
   ): Promise<{ accessToken: string }> {
     return await this.authService.login(authData);
   }
-
-  @Patch('actualizar/:nombreUsuario')
-  async actualizarUsuario(
-    @Param('nombreUsuario') nombreUsuario: string,
-    @Body() data: ActualizarUsuarioDto,
-  ) {
-    return await this.authService.actualizarUsuario(nombreUsuario, data);
-  }
 }
