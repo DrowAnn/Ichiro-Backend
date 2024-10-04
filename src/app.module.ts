@@ -5,10 +5,17 @@ import { AuthModule } from './auth/auth.module';
 import { DatosSociodemograficosModule } from './datos-sociodemograficos/datos-sociodemograficos.module';
 import { JornadasLaboralesModule } from './jornadas-laborales/jornadas-laborales.module';
 import { LiquidacionesNominasModule } from './liquidaciones-nominas/liquidaciones-nominas.module';
+import { DatosHijosModule } from './datos-hijos/datos-hijos.module';
 
 @Module({
-  imports: [ColaboradoresModule, UsuariosModule, AuthModule, DatosSociodemograficosModule, JornadasLaboralesModule, LiquidacionesNominasModule],
-  controllers: [],
-  providers: [],
+  imports: [
+    ColaboradoresModule,
+    UsuariosModule,
+    AuthModule,
+    DatosSociodemograficosModule,
+    JornadasLaboralesModule,
+    LiquidacionesNominasModule,
+    DatosHijosModule,
+  ],
 })
 export class AppModule {}

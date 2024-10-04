@@ -6,7 +6,6 @@ import {
   Patch,
   Delete,
   Param,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 import { JornadasLaboralesService } from './jornadas-laborales.service';

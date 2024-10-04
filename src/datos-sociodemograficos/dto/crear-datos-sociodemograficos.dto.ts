@@ -1,5 +1,4 @@
 import { DatosSociodemograficos } from '@prisma/client';
-import { JsonValue } from '@prisma/client/runtime/library';
 
 export class CrearDatosSociodemograficosDto implements DatosSociodemograficos {
   numeroIdentificacion: string;
@@ -34,7 +33,6 @@ export class CrearDatosSociodemograficosDto implements DatosSociodemograficos {
   telefonoConyuge: string;
   tieneHijos: boolean;
   cuantosHijosTiene: number;
-  datosHijos: JsonValue;
   personasNucleoFamiliar: number;
   personasDependientesEconomicamente: number;
   parentescos: string;

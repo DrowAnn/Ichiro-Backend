@@ -74,6 +74,8 @@ model Colaboradores {
   datosSociodemograficos DatosSociodemograficos[]
   jornadasLaborales JornadasLaborales[]
   liquidacionesNomina LiquidacionesNomina[]
+
+  DatosHijos DatosHijos[]
 }
 
 model DatosSociodemograficos {
@@ -110,7 +112,6 @@ model DatosSociodemograficos {
   telefonoConyuge String?
   tieneHijos Boolean?
   cuantosHijosTiene Int? @db.SmallInt @default(0)
-  datosHijos Json?
   personasNucleoFamiliar Int? @db.SmallInt
   personasDependientesEconomicamente Int? @db.SmallInt
   parentescos String?
@@ -120,6 +121,16 @@ model DatosSociodemograficos {
   nombreContactoEmergencia String?
   telefonoContactoEmergencia String?
   parentescoContactoEmergencia String?
+}
+
+model DatosHijos {
+  numeroIdentificacion String
+  colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
+  nombreHijo String
+  identificacionHijo String
+  fechaNacimientoHijo DateTime? @db.Date
+  generoHijo String?
+  @@id([numeroIdentificacion, identificacionHijo])
 }
 
 model JornadasLaborales {
