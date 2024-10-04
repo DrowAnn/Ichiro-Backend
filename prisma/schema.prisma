@@ -84,9 +84,9 @@ model DatosSociodemograficos {
   tipoVivienda String?
   grupoSanguineo String?
   enfermedadesDiagnosticadasPermanentes Boolean?
-  tiposEnfermedadesPermanentes Json?
+  tiposEnfermedadesPermanentes String?
   medicamentoRecetadoPermanente Boolean?
-  tiposMedicamentosPermanentes Json?
+  tiposMedicamentosPermanentes String?
   fuma Boolean?
   consumeBebidasAlcoholicas Boolean?
   consumeBebidasEnergeticasConstantemente Boolean?
