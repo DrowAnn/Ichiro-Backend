@@ -8,9 +8,9 @@ export class CrearDatosSociodemograficosDto implements DatosSociodemograficos {
   tipoVivienda: string;
   grupoSanguineo: string;
   enfermedadesDiagnosticadasPermanentes: boolean;
-  tiposEnfermedadesPermanentes: JsonValue;
+  tiposEnfermedadesPermanentes: string;
   medicamentoRecetadoPermanente: boolean;
-  tiposMedicamentosPermanentes: JsonValue;
+  tiposMedicamentosPermanentes: string;
   fuma: boolean;
   consumeBebidasAlcoholicas: boolean;
   consumeBebidasEnergeticasConstantemente: boolean;
