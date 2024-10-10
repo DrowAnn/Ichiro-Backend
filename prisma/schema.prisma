@@ -43,6 +43,8 @@ model Usuarios {
   numeroIdentificacion String? @unique
   colaborador Colaboradores? @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
   contrasena String
+  nombreModificadorUsuario String @default("Admin")
+  fechaUltimaModificacionUsuario DateTime @updatedAt @default("2024-10-10T00:00:00Z")
   rol Roles @default(Colaborador)
 }
 
@@ -71,11 +73,14 @@ model Colaboradores {
   horasMensualesContratadas Int? @db.SmallInt
   formaPago String?
   activo Boolean? @default(true)
+  nombreModificadorColaborador String @default("Admin")
+  fechaUltimaModificacionColaborador DateTime @updatedAt @default("2024-10-10T00:00:00Z")
   datosSociodemograficos DatosSociodemograficos[]
-  jornadasLaborales JornadasLaborales[]
   liquidacionesNomina LiquidacionesNomina[]
-
   DatosHijos DatosHijos[]
+  Horarios Horarios[]
+  AuditoriaHorarios AuditoriasHorarios[]
+  liquidacionesHoras LiquidacionesHoras[]
 }
 
 model DatosSociodemograficos {
@@ -121,6 +126,8 @@ model DatosSociodemograficos {
   nombreContactoEmergencia String?
   telefonoContactoEmergencia String?
   parentescoContactoEmergencia String?
+  nombreModificadorDatosSociodemograficos String @default("Admin")
+  fechaUltimaModificacionDatosSociodemograficos DateTime @updatedAt @default("2024-10-10T00:00:00Z")
 }
 
 model DatosHijos {
@@ -130,29 +137,76 @@ model DatosHijos {
   identificacionHijo String
   fechaNacimientoHijo DateTime? @db.Date
   generoHijo String?
+  nombreModificadorDatosHijo String @default("Admin")
+  fechaUltimaModificacionDatosHijo DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+
   @@id([numeroIdentificacion, identificacionHijo])
 }
 
-model JornadasLaborales {
-  idJornada Int @default(autoincrement())
+model Horarios {
   numeroIdentificacion String
   colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
-  diaJornada DateTime @db.Date
-  festivo Boolean?
-  horaProgramadaEntrada DateTime?
-  horaProgramadaSalida DateTime?
-  horaEntrada DateTime?
-  horaSalida DateTime?
-  llegadaTarde Boolean?
-  cantidadHorasExtrasDiurnas Float?
-  cantidadHorasExtrasNocturnas Float?
-  cantidadHorasExtrasDiurnasDominicalFestiva Float?
-  cantidadHorasExtrasNocturnasDominicalFestiva Float?
-  cantidadHorasRecargoNocturno Float?
-  cantidadHorasRecargoDiurnoDominicalFestivo Float?
-  cantidadHorasRecargoNocturnoDominicalFestivo Float?
+  fechaHoraIngresoProgramada DateTime
+  fechaHoraSalidaProgramada DateTime
+  horaDesayuno String?
+  tiempoDesayuno Int?
+  horaAlmuerzo String?
+  tiempoAlmuerzo Int?
+  horaCena String?
+  timpoCena Int?
+  horaOtroReceso String?
+  tiempoReceso Int?
+  horasProgramadas Float
+  areaFuncionProgramada String?
+  observacionNovedadesHorarios String?
+  nombreModificadorHorarios String @default("Admin")
+  fechaUltimaModificacionHorarios DateTime @updatedAt @default("2024-10-10T00:00:00Z")
 
-  @@id([numeroIdentificacion, diaJornada])
+  @@id([numeroIdentificacion, fechaHoraIngresoProgramada])
+
+}
+
+model AuditoriasHorarios {
+  numeroIdentificacion String
+  colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
+  fechaHoraIngresoReal DateTime
+  fechaHoraSalidaReal DateTime
+  minutosTarde Int
+  horaTrabajadas Float
+  horasExtrasDia Float
+  horasRecargoNocturno Float
+  horasRecargoDoFeDiurno Float
+  horasRecargoDoFeNocturno Float
+  horasExtrasDiurnas Float
+  horasExtrasNocturnas Float
+  horasExtrasDoFeDiurnas Float
+  horasExtrasDoFeNocturnas Float
+  observacionNovedadesAuditoria String
+  nombreModificadorAuditoria String @default("Admin")
+  fechaUltimaModificacionAuditoria DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+
+  @@id([numeroIdentificacion, fechaHoraIngresoReal])
+}
+
+model LiquidacionesHoras {
+  numeroIdentificacion String
+  colaborador Colaboradores @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
+  fechaInicioPeriodo DateTime
+  fechaFinalPeriodo DateTime
+  totalHorasLaboradasPeriodo Float
+  totalHorasExtrasPeriodo Float
+  totalHorasRecargoNocturnoPeriodo Float
+  totalHorasRecargoDoFeDiurnoPeriodo Float
+  totalHorasRecargoDoFeNocturnoPeriodo Float
+  totalHorasExtrasDiurnasPeriodo Float
+  totalHorasExtrasNocturnasPeriodo Float
+  totalHorasExtrasDoFeDiurnasPeriodo Float
+  totalHorasExtrasDoFeNocturnoPeriodo Float
+  observacionNovedadesLiquidacionHoras String
+  nombreModificadorLiquidacionHoras String @default("Admin")
+  fechaUltimaModificacionLiquidacionHoras DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+
+  @@id([numeroIdentificacion, fechaInicioPeriodo, fechaFinalPeriodo])
 }
 
 model LiquidacionesNomina {
@@ -198,6 +252,8 @@ model LiquidacionesNomina {
   cesantias Decimal? @db.Money
   prima Decimal? @db.Money
   totalPagar Decimal? @db.Money
+  nombreModificadorLiquidacionNomina String @default("Admin")
+  fechaUltimaModificacionLiquidacionNomina DateTime @updatedAt @default("2024-10-10T00:00:00Z")
 
   @@id([numeroIdentificacion, mes, ano, quincena])
 }

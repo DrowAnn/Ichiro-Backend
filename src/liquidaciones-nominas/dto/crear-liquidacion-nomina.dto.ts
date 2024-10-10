@@ -2,6 +2,8 @@ import { LiquidacionesNomina } from '@prisma/client';
 import { Decimal, JsonValue } from '@prisma/client/runtime/library';
 
 export class CrearLiquidacionNominaDto implements LiquidacionesNomina {
+  nombreModificadorLiquidacionNomina: string;
+  fechaUltimaModificacionLiquidacionNomina: Date;
   idLiquidacion: number;
   numeroIdentificacion: string;
   mes: number;
