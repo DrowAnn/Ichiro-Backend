@@ -1,6 +1,8 @@
 import { DatosSociodemograficos } from '@prisma/client';
 
 export class CrearDatosSociodemograficosDto implements DatosSociodemograficos {
+  nombreModificadorDatosSociodemograficos: string;
+  fechaUltimaModificacionDatosSociodemograficos: Date;
   numeroIdentificacion: string;
   estadoCivil: string;
   estratoSocioeconomico: number;

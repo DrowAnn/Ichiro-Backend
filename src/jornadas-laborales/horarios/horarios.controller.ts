@@ -24,12 +24,12 @@ export class HorariosController {
     return this.horariosService.crearHorario(data);
   }
 
-  @Post()
+  @Post('crear-varios')
   crearVarios(@Body() data: CrearHorarioDto[]) {
     return this.horariosService.crearHorarios(data);
   }
 
-  @Patch(':numeroIdentificacion')
+  @Patch('colaborador/:numeroIdentificacion')
   actualizarUno(
     @Param('numeroIdentificacion') numeroIdentificacion: string,
     @Query('fechaHoraIngresoProgramada') fechaHoraIngresoProgramada: Date,
@@ -42,7 +42,14 @@ export class HorariosController {
     );
   }
 
-  @Get(':numeroIdentificacion')
+  @Get('dias')
+  buscarUnoDia(
+    @Query('fechaHoraIngresoProgramadan') fechaHoraIngresoProgramada: Date,
+  ) {
+    return this.horariosService.buscarHorariosDia(fechaHoraIngresoProgramada);
+  }
+
+  @Get('individual/:numeroIdentificacion')
   buscarUno(
     @Param('numeroIdentificacion') numeroIdentificacion: string,
     @Query('fechaHoraIngresoProgramada') fechaHoraIngresoProgramada: Date,
@@ -53,19 +60,12 @@ export class HorariosController {
     );
   }
 
-  @Get('dias')
-  buscarUnoDia(
-    @Query('fechaHoraIngresoProgramadan') fechaHoraIngresoProgramada: Date,
-  ) {
-    return this.horariosService.buscarHorariosDia(fechaHoraIngresoProgramada);
-  }
-
-  @Get(':numeroIdentificacion')
+  @Get('colaborador/:numeroIdentificacion')
   buscarColaborador(@Param('numeroIdentificacion') numerIdenticacion: string) {
     return this.horariosService.buscarHorariosColaborador(numerIdenticacion);
   }
 
-  @Delete(':numeroIdentificacion')
+  @Delete('colaborador/:numeroIdentificacion')
   remove(
     @Param('numeroIdentificacion') numeroIdentificacion: string,
     @Query('fechaHoraIngresoProgramadan') fechaHoraIngresoProgramadan: Date,

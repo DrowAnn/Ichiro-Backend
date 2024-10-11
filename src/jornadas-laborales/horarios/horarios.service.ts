@@ -3,6 +3,7 @@ import { CrearHorarioDto } from './dto/crear-horario.dto';
 import { ActualizarHorarioDto } from './dto/actualizar-horario.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Horarios } from '@prisma/client';
+import { enviroment } from 'env/enviroment';
 
 @Injectable()
 export class HorariosService {
@@ -15,7 +16,7 @@ export class HorariosService {
   }
 
   async crearHorarios(data: CrearHorarioDto[]) {
-    await this.prismaService.horarios.createMany({
+    return await this.prismaService.horarios.createMany({
       data,
     });
   }
@@ -53,9 +54,21 @@ export class HorariosService {
   async buscarHorariosDia(
     fechaHoraIngresoProgramada: Date,
   ): Promise<Horarios[]> {
+    const baseInicial: Date = new Date(fechaHoraIngresoProgramada);
+    const baseFinal: Date = new Date(fechaHoraIngresoProgramada);
+    const fechaInicial: Date = new Date(
+      baseInicial.setHours(0 - enviroment.offsetTime, 0, 0, 0),
+    );
+    const fechaFinal: Date = new Date(
+      baseFinal.setHours(23 - enviroment.offsetTime, 59, 59, 999),
+    );
+
     return await this.prismaService.horarios.findMany({
       where: {
-        fechaHoraIngresoProgramada,
+        fechaHoraIngresoProgramada: {
+          gte: fechaInicial,
+          lt: fechaFinal,
+        },
       },
     });
   }

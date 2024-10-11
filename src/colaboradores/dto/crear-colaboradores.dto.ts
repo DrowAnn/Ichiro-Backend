@@ -2,6 +2,8 @@ import { $Enums, Colaboradores } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
 
 export class CrearColaboradoresDto implements Colaboradores {
+  nombreModificadorColaborador: string;
+  fechaUltimaModificacionColaborador: Date;
   numeroIdentificacion: string;
   primerNombre: string;
   segundoNombre: string;

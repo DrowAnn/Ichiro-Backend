@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Patch, UseGuards } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
-import { ActualizarJornadaLaboralDto } from 'src/jornadas-laborales/dto/actualizar-jornada-laboral.dto';
+import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('usuarios')
@@ -11,7 +11,7 @@ export class UsuariosController {
   @Patch(':nombreUsuario')
   async actualizacionParcial(
     @Param('nombreUsuario') nombreUsuario: string,
-    @Body() data: ActualizarJornadaLaboralDto,
+    @Body() data: ActualizarUsuarioDto,
   ) {
     return await this.usuariosService.actualizarUsuario(nombreUsuario, data);
   }
