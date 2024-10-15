@@ -44,7 +44,7 @@ model Usuarios {
   colaborador Colaboradores? @relation(fields: [numeroIdentificacion], references: [numeroIdentificacion])
   contrasena String
   nombreModificadorUsuario String @default("Admin")
-  fechaUltimaModificacionUsuario DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionUsuario DateTime @updatedAt
   rol Roles @default(Colaborador)
 }
 
@@ -74,7 +74,7 @@ model Colaboradores {
   formaPago String?
   activo Boolean? @default(true)
   nombreModificadorColaborador String @default("Admin")
-  fechaUltimaModificacionColaborador DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionColaborador DateTime @updatedAt
   datosSociodemograficos DatosSociodemograficos[]
   liquidacionesNomina LiquidacionesNomina[]
   DatosHijos DatosHijos[]
@@ -127,7 +127,7 @@ model DatosSociodemograficos {
   telefonoContactoEmergencia String?
   parentescoContactoEmergencia String?
   nombreModificadorDatosSociodemograficos String @default("Admin")
-  fechaUltimaModificacionDatosSociodemograficos DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionDatosSociodemograficos DateTime @updatedAt
 }
 
 model DatosHijos {
@@ -138,7 +138,7 @@ model DatosHijos {
   fechaNacimientoHijo DateTime? @db.Date
   generoHijo String?
   nombreModificadorDatosHijo String @default("Admin")
-  fechaUltimaModificacionDatosHijo DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionDatosHijo DateTime @updatedAt
 
   @@id([numeroIdentificacion, identificacionHijo])
 }
@@ -160,7 +160,7 @@ model Horarios {
   areaFuncionProgramada String?
   observacionNovedadesHorarios String?
   nombreModificadorHorarios String @default("Admin")
-  fechaUltimaModificacionHorarios DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionHorarios DateTime @updatedAt
 
   @@id([numeroIdentificacion, fechaHoraIngresoProgramada])
 
@@ -183,7 +183,7 @@ model AuditoriasHorarios {
   horasExtrasDoFeNocturnas Float
   observacionNovedadesAuditoria String
   nombreModificadorAuditoria String @default("Admin")
-  fechaUltimaModificacionAuditoria DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionAuditoria DateTime @updatedAt
 
   @@id([numeroIdentificacion, fechaHoraIngresoReal])
 }
@@ -204,7 +204,7 @@ model LiquidacionesHoras {
   totalHorasExtrasDoFeNocturnoPeriodo Float
   observacionNovedadesLiquidacionHoras String
   nombreModificadorLiquidacionHoras String @default("Admin")
-  fechaUltimaModificacionLiquidacionHoras DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionLiquidacionHoras DateTime @updatedAt
 
   @@id([numeroIdentificacion, fechaInicioPeriodo, fechaFinalPeriodo])
 }
@@ -253,7 +253,7 @@ model LiquidacionesNomina {
   prima Decimal? @db.Money
   totalPagar Decimal? @db.Money
   nombreModificadorLiquidacionNomina String @default("Admin")
-  fechaUltimaModificacionLiquidacionNomina DateTime @updatedAt @default("2024-10-10T00:00:00Z")
+  fechaUltimaModificacionLiquidacionNomina DateTime @updatedAt
 
   @@id([numeroIdentificacion, mes, ano, quincena])
 }
