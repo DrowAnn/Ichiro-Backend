@@ -44,7 +44,7 @@ export class HorariosController {
 
   @Get('dias')
   buscarUnoDia(
-    @Query('fechaHoraIngresoProgramadan') fechaHoraIngresoProgramada: Date,
+    @Query('fechaHoraIngresoProgramada') fechaHoraIngresoProgramada: Date,
   ) {
     return this.horariosService.buscarHorariosDia(fechaHoraIngresoProgramada);
   }

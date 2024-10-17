@@ -9,7 +9,7 @@ export class CrearHorarioDto implements Horarios {
   horaAlmuerzo: string;
   tiempoAlmuerzo: number;
   horaCena: string;
-  timpoCena: number;
+  tiempoCena: number;
   horaOtroReceso: string;
   tiempoReceso: number;
   horasProgramadas: number;
