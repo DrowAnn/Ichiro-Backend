@@ -49,6 +49,16 @@ export class HorariosController {
     return this.horariosService.buscarHorariosDia(fechaHoraIngresoProgramada);
   }
 
+  @Get('rango')
+  buscarRango(@Query() query: any) {
+    const fechaHoraInicial: Date = query['fechaHoraInicial'];
+    const fechaHoraFinal: Date = query['fechaHoraFinal'];
+    return this.horariosService.buscarHorariosRango(
+      fechaHoraInicial,
+      fechaHoraFinal,
+    );
+  }
+
   @Get('individual/:numeroIdentificacion')
   buscarUno(
     @Param('numeroIdentificacion') numeroIdentificacion: string,

@@ -73,6 +73,34 @@ export class HorariosService {
     });
   }
 
+  async buscarHorariosRango(
+    fechaHoraInicial: Date,
+    fechaHoraFinal: Date,
+  ): Promise<Horarios[]> {
+    console.log('------------------');
+    console.log(fechaHoraInicial);
+    console.log(fechaHoraFinal);
+    const fechaInicialBusqueda: string = new Date(
+      new Date(fechaHoraInicial).setHours(-enviroment.offsetTime),
+    ).toISOString();
+    const fechaFinalBusqueda: string = new Date(
+      new Date(fechaHoraFinal).setHours(23 - enviroment.offsetTime, 59, 59),
+    ).toISOString();
+
+    console.log('------------------');
+    console.log(fechaInicialBusqueda);
+    console.log(fechaFinalBusqueda);
+
+    return await this.prismaService.horarios.findMany({
+      where: {
+        fechaHoraIngresoProgramada: {
+          gte: fechaInicialBusqueda,
+          lt: fechaFinalBusqueda,
+        },
+      },
+    });
+  }
+
   async buscarHorariosColaborador(
     numeroIdentificacion: string,
   ): Promise<Horarios[]> {
